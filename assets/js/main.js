@@ -17,19 +17,28 @@ $(function(){
         var nRandom = Math.ceil(Math.random() * 10);
         controllo(nRandom, arrayRandom);
     }
-    alert(arrayRandom);   
+    var p = $("p");
+    p.text(arrayRandom);
     // Dopo 30 secondi l’utente deve inserire, un prompt alla volta, i numeri che ha visto precedentemente.
     var punteggio = 0;
+    var arraySimon = [];
+    setTimeout(function(){
+        p.hide();
+    },5000);
     setTimeout(function(){
         for(var i = 0; i < 5; i++){
             var numeroSimon = Number(prompt("Quale numero c'era?"));
-            for (var j = 0; j < arrayRandom.length; j++){
-                if (numeroSimon == arrayRandom[j]){
-                    punteggio += 1;
-                }
-            }
+            controllo(numeroSimon, arraySimon);
+            for (var j = 0; j < 5; j++){
+            if (numeroSimon == arrayRandom[j]){
+                punteggio += 1;
+            }}
+            for (var k = 0; k < i; k++){
+            if (numeroSimon == arraySimon[k]){
+                punteggio = punteggio - 1;
+            }}    
         }
         // Una volta inseriti i 5 numeri, il software dice quanti e quali numeri sono stati ricordati.
         console.log(punteggio);
-    },3000);
+    },6000);
 });
